@@ -1,7 +1,6 @@
-import AdditionBtn from "@/components/AdditionBtn";
-import GoogleImage from "@/components/GoogleImage";
-import HomeHeader from "@/components/HomeHeader";
-import Search from "@/components/Search";
+import GoogleImage from "@/components/home/GoogleImage";
+import HomeHeader from "@/components/home/HomeHeader";
+import HomeSearch from "@/components/home/HomeSearch";
 
 const Home = () => {
   return (
@@ -9,8 +8,7 @@ const Home = () => {
       <HomeHeader />
       <div className="flex flex-col items-center mt-24">
         <GoogleImage />
-        <Search />
-        <AdditionBtn />
+        <HomeSearch />
       </div>
     </div>
   );
