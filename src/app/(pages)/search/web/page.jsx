@@ -1,3 +1,4 @@
+import WebSearchResult from "@/components/WebSearchResult";
 import Link from "next/link";
 
 const WebPages = async ({ searchParams }) => {
@@ -6,6 +7,7 @@ const WebPages = async ({ searchParams }) => {
   );
   const data = await response.json();
   const results = data.items;
+  console.log(results);
 
   if (!results) {
     return (
@@ -23,12 +25,7 @@ const WebPages = async ({ searchParams }) => {
     );
   }
 
-  return (
-    <div>
-      {results &&
-        results.map((result) => <h1 key={result.kind}>{result.title}</h1>)}
-    </div>
-  );
+  return <div>{results && <WebSearchResult results={data} />}</div>;
 };
 
 export default WebPages;
