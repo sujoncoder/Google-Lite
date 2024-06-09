@@ -7,7 +7,6 @@ const WebPages = async ({ searchParams }) => {
   );
   const data = await response.json();
   const results = data.items;
-  console.log(results);
 
   if (!results) {
     return (

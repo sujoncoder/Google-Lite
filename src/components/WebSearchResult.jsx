@@ -22,7 +22,9 @@ const WebSearchResult = ({ results }) => {
               {result.title}
             </Link>
           </div>
-          <p className="text-slate-500 ">{Parser(result.htmlSnippet)}</p>
+          <p className="text-slate-500 ">
+            {result.htmlSnippet ? Parser(result.htmlSnippet) : ""}
+          </p>
         </div>
       ))}
     </div>
