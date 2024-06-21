@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { CgMenuGridR } from "react-icons/cg";
 import { IoSettingsOutline } from "react-icons/io5";
+import { VscSignIn } from "react-icons/vsc";
 import SearchBox from "./SearchBox";
 import SearchHeaderOption from "./SearchHeaderOption";
 
@@ -31,9 +32,11 @@ const SearchHeader = () => {
             <CgMenuGridR className="w-10 h-10 bg-transparent text-slate-500 hover:bg-slate-200 rounded-full p-2 duration-300" />
           </div>
 
-          <button className="bg-blue-500 px-4 py-2 text-white rounded-md hover:brightness-110 hover:shadow active:bg-blue-600 duration-300">
+          <button className="bg-blue-500 hidden sm:inline-flex px-4 py-2 text-white rounded-md hover:brightness-110 hover:shadow active:bg-blue-600 duration-300">
             Sign In
           </button>
+
+          <VscSignIn className="sm:hidden text-2xl text-blue-500" />
         </div>
       </div>
 

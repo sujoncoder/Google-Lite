@@ -1,22 +1,26 @@
 import WebSearchResult from "@/components/WebSearchResult";
 import Link from "next/link";
 
-const WebPages = async ({ searchParams }) => {
+export default async function WebSearchPage({ searchParams }) {
+  const startIndex = searchParams.start || "1";
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+
   const response = await fetch(
-    `https://www.googleapis.com/customsearch/v1?key=${process.env.GOOGLE_SEARCH_ENGINE_API}&cx=${process.env.GOOGLE_CSX}&q=${searchParams.searchTerm}`
+    `https://www.googleapis.com/customsearch/v1?key=${process.env.GOOGLE_SEARCH_ENGINE_API}&cx=${process.env.GOOGLE_CSX}&q=${searchParams.searchTerm}'}&start=${startIndex}`
   );
   const data = await response.json();
   const results = data.items;
+  console.log(data);
 
   if (!results) {
     return (
-      <div className="flex flex-col space-y-4 justify-center items-center my-10">
-        <h1 className="text-3xl font-semibold text-pink-500">
-          Opps this result not found {searchParams.searchTerm}!
+      <div className="flex flex-col justify-center items-center pt-10">
+        <h1 className="text-3xl mb-4">
+          No results found for {searchParams.searchTerm}
         </h1>
-        <p className="text-2xl text-slate-500">
-          Back to{" "}
-          <Link className="text-blue-500 hover:underline duration-300" href="/">
+        <p className="text-lg">
+          Try searching the web or images for something else{" "}
+          <Link href="/" className="text-blue-500">
             Home
           </Link>
         </p>
@@ -25,6 +29,4 @@ const WebPages = async ({ searchParams }) => {
   }
 
   return <div>{results && <WebSearchResult results={data} />}</div>;
-};
-
-export default WebPages;
+}

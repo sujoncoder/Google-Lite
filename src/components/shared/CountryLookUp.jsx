@@ -10,7 +10,7 @@ const CountryLookUp = () => {
     const fetchCountry = async () => {
       try {
         const response = await fetch(
-          `https://ipinfo.io/json?token=${process.env.MY_IP}`
+          `https://ipinfo.io/json?token=37635ab8121b01`
         );
         if (!response.ok) {
           throw new Error("Network response was not ok");

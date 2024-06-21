@@ -1,55 +1,31 @@
 import ImageSearchResult from "@/components/ImageSearchResult";
 import Link from "next/link";
 
-const SearchImagePages = async ({ searchParams }) => {
-  try {
-    const response = await fetch(
-      `https://www.googleapis.com/customsearch/v1?key=${process.env.GOOGLE_SEARCH_ENGINE_API}&cx=${process.env.GOOGLE_CSX}&q=${searchParams.searchTerm}&searchType=image`
-    );
+export default async function ImageSearchPage({ searchParams }) {
+  const startIndex = searchParams.start || "1";
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+  const response = await fetch(
+    `https://www.googleapis.com/customsearch/v1?key=${process.env.GOOGLE_SEARCH_ENGINE_API}&cx=${process.env.GOOGLE_CSX}&q=${searchParams.searchTerm}'}&searchType=image&start=${startIndex}`
+  );
 
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
+  const data = await response.json();
+  const results = data.items;
 
-    const data = await response.json();
-    const results = data.items;
-
-    if (!results || results.length === 0) {
-      return (
-        <div className="flex flex-col space-y-4 justify-center items-center my-10">
-          <h1 className="text-3xl font-semibold text-pink-500">
-            Oops, no results found for {searchParams.searchTerm}!
-          </h1>
-          <p className="text-2xl text-slate-500">
-            Back to{" "}
-            <Link
-              className="text-blue-500 hover:underline duration-300"
-              href="/"
-            >
-              Home
-            </Link>
-          </p>
-        </div>
-      );
-    }
-
-    return <ImageSearchResult results={data} />;
-  } catch (error) {
-    console.error("Error fetching data:", error);
+  if (!results) {
     return (
-      <div className="flex flex-col space-y-4 justify-center items-center my-10">
-        <h1 className="text-3xl font-semibold text-pink-500">
-          An error occurred while fetching the data.
+      <div className="flex flex-col justify-center items-center pt-10">
+        <h1 className="text-3xl mb-4">
+          No results found for {searchParams.searchTerm}
         </h1>
-        <p className="text-2xl text-slate-500">
-          Please try again later or go back to{" "}
-          <Link className="text-blue-500 hover:underline duration-300" href="/">
+        <p className="text-lg">
+          Try searching the web or images for something else{" "}
+          <Link href="/" className="text-blue-500">
             Home
           </Link>
         </p>
       </div>
     );
   }
-};
 
-export default SearchImagePages;
+  return <div>{results && <ImageSearchResult results={data} />}</div>;
+}

@@ -1,8 +1,8 @@
 import Parser from "html-react-parser";
 import Link from "next/link";
+import PaginationButtons from "./PaginationButtons";
 
 const WebSearchResult = ({ results }) => {
-  console.log(results);
   return (
     <div className="w-full mx-auto px-4 pb-20 sm:pl-[5%] md:pl-[14%] lg:pl-[50]">
       <h1>{results?.title}</h1>
@@ -13,7 +13,7 @@ const WebSearchResult = ({ results }) => {
 
       {results?.items?.map((result) => (
         <div className="mb-8" key={result.link}>
-          <div className="group flex flex-col text-slate-500">
+          <div className="group flex flex-col text-slate-500 text-sm">
             <Link href={result.link}>{result.formattedUrl}</Link>
             <Link
               className="group-hover:underline decoration-blue-500 text-xl truncate font-medium text-blue-500"
@@ -22,11 +22,12 @@ const WebSearchResult = ({ results }) => {
               {result.title}
             </Link>
           </div>
-          <p className="text-slate-500 ">
+          <p className="text-slate-700">
             {result.htmlSnippet ? Parser(result.htmlSnippet) : ""}
           </p>
         </div>
       ))}
+      <PaginationButtons />
     </div>
   );
 };

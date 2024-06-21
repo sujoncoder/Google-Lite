@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import PaginationButtons from "./PaginationButtons";
 
 const ImageSearchResult = ({ results }) => {
   return (
@@ -8,23 +9,23 @@ const ImageSearchResult = ({ results }) => {
         {results.items.map((result) => (
           <div className="mb-8" key={result.link}>
             <div className="group">
-              <Link href={result.image?.contextLink || "#"} passHref>
+              <Link href={result.image?.contextLink || "#"}>
                 <div>
                   <Image
                     src={result?.link}
                     alt={result.title}
                     width={300}
                     height={180}
-                    className="h-60 group-hover:shadow-xl w-full object-contain transition-shadow duration-300 rounded"
+                    className="h-60 group-hover:shadow-xl w-full object-contain transition-shadow duration-300 rounded-lg"
                   />
                 </div>
               </Link>
-              <Link href={result.image?.contextLink || "#"} passHref>
+              <Link href={result.image?.contextLink || "#"}>
                 <p className="group-hover:underline truncate text-xl cursor-pointer">
                   {result.title}
                 </p>
               </Link>
-              <Link href={result.image?.contextLink || "#"} passHref>
+              <Link href={result.image?.contextLink || "#"}>
                 <p className="group-hover:underline truncate text-slate-400 cursor-pointer">
                   {result.displayLink}
                 </p>
@@ -33,6 +34,7 @@ const ImageSearchResult = ({ results }) => {
           </div>
         ))}
       </div>
+      <PaginationButtons />
     </div>
   );
 };

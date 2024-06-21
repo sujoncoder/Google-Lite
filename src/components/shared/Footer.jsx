@@ -2,7 +2,7 @@ import CountryLookUp from "./CountryLookUp";
 
 const Footer = () => {
   return (
-    <footer className="absolute bottom-0 bg-slate-50 p-4 w-full">
+    <footer className="absolute bottom-0 bg-slate-50 p-5 w-full">
       <CountryLookUp />
 
       <div className="flex items-center justify-between pt-4">
